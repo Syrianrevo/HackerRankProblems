@@ -1,0 +1,20 @@
+public class AlternatingCharacters{
+
+     public static void main(String []args){
+        String str = "AAABBB"; 
+        
+        System.out.println(alternatingCharacters(str)); 
+        }
+
+     private static int alternatingCharacters(String s){
+            
+            int deleteCount = 0; 
+            
+            for(int i = 0; i < s.length()-1; i++){
+                if(s.charAt(i) == s.charAt(i+1)){
+                    deleteCount++;
+                }
+            }
+            return deleteCount;
+        }
+}
