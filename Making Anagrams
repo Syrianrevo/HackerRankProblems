@@ -1,0 +1,18 @@
+public class Making Anagrams{
+
+     public static void main(String []args){
+        String a = "cdef";
+        String b = "abcihjk"; 
+        
+        String first = a; 
+        
+        for(char c : a.toCharArray()){
+            if(b.indexOf(c) != -1){
+                first = first.replaceFirst(c + "", "");
+                b = b.replaceFirst(c + "","");
+            }
+        }
+        
+        System.out.println(first.length() + b.length()); 
+     }
+}
