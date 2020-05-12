@@ -1,0 +1,53 @@
+import java.io.*; 
+import java.util.*; 
+
+public class SherlockAndTheValidString{
+
+     public static void main(String []args){
+        String str = "abcdefghhhgfedecba"; 
+    
+        isValid(str);
+        }
+
+     private static void isValid(String s){
+            HashMap<Character, Integer> hTable = new HashMap<Character, Integer>(); 
+            int max = Integer.MIN_VALUE; 
+            int min = Integer.MAX_VALUE; 
+                                
+            
+            for(char c : s.toCharArray()){
+                if(hTable.containsKey(c)){
+                    hTable.put(c,hTable.get(c)+1);
+                    if(hTable.get(c) > max){
+                        max = hTable.get(c); 
+}
+                }else{
+                    hTable.put(c, 1);  
+                    
+                }
+            }
+
+            int count1=0,count2=0;
+            for (Map.Entry m:hTable.entrySet()){
+             min=Math.min(min,(int)m.getValue());
+            }
+            
+           for (Map.Entry m:hTable.entrySet()){
+                int val=(int)m.getValue();
+                if(val==max){
+                 count1++;
+                }else if(val==min){
+                 count2++;
+                }
+           }
+          System.out.println(count1 + "      " + count2);
+        String str = "NO"; 
+        if(max-min==0 || (count1==hTable.size()-1 && min==1) || (count2==hTable.size()-1 && max-min==1)){
+            str = "YES";
+            return str; 
+        }
+        
+        return str;
+    }
+}
+
