@@ -1,0 +1,37 @@
+public class RunLengthDecoding{
+
+     public static void main(String []args){
+        String str = "1a";
+        System.out.println(runLengthDecoding(str));
+        //commonChild(str); 
+     }
+     
+     static String runLengthDecoding(String s1) {
+        int counter = 0; 
+         
+         StringBuilder sb = new StringBuilder(); 
+         
+         for(int k = 0; k <= s1.length()-1; k++){
+             
+             if(Character.isDigit(s1.charAt(k))){
+                counter = Integer.parseInt(String.valueOf(s1.charAt(k))); 
+               //System.out.println(counter);
+                char nextC = s1.charAt(k + 1);
+                    if(counter == 1){
+                        sb.append(nextC);
+                    }else{
+                        for(int i = 1; i <= counter; i++){
+                            sb.append(nextC);
+                            
+                        }
+                    }
+            }
+         
+     }
+     
+     return sb.toString(); 
+     
+    }
+    
+}
+           
