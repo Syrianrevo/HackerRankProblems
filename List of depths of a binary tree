@@ -1,0 +1,44 @@
+/**
+ * Definition of TreeNode:
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left, right;
+ *     public TreeNode(int val) {
+ *         this.val = val;
+ *         this.left = this.right = null;
+ *     }
+ * }
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    /**
+     * @param root the root of binary tree
+     * @return a lists of linked list
+     */
+    public List<ListNode> binaryTreeToLists(TreeNode root) {
+        // Write your code here
+        ArrayList<ListNode<TreeNode>> lists = new ArrayList<ListNode<TreeNode>>();
+        helper(root, lists, 0);]
+        return lists; 
+    }
+    
+    void helper(TreeNode root, ArrayList<ListNode<TreeNode>> lists, int level){
+        if (root == null) return; 
+        
+        ListNoode<TreeNode> list = null; 
+        if(lists.size == level){
+            list = new Listnode<TreeNode>(); 
+            lists.add(list);
+        }else{
+            list = lists.get(level); 
+        }
+        list.add(root); 
+        helper(root.left, lists, int level+1);
+        helper(root.right, lists, int level+1);
+    }
+}
