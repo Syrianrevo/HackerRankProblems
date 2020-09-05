@@ -1,0 +1,68 @@
+import java.util.*;
+
+public class TopOlogicalSort{
+
+public static void main(String[] args) {
+    List<Integer> result = sort(4,
+        new int[][] { new int[] { 3, 2 }, new int[] { 3, 0 }, new int[] { 2, 0 }, new int[] { 2, 1 } });
+    System.out.println(result);
+
+    result = sort(5, new int[][] { new int[] { 4, 2 }, new int[] { 4, 3 }, new int[] { 2, 0 },
+        new int[] { 2, 1 }, new int[] { 3, 1 } });
+    System.out.println(result);
+
+    result = sort(7, new int[][] { new int[] { 6, 4 }, new int[] { 6, 2 }, new int[] { 5, 3 },
+        new int[] { 5, 4 }, new int[] { 3, 0 }, new int[] { 3, 1 }, new int[] { 3, 2 }, new int[] { 4, 1 } });
+    System.out.println(result);
+  }
+
+public static List<Integer> sort(int vertices, int[][] edges) {
+    List<Integer> sortedOrder = new ArrayList<>();
+    // TODO: Write your code here
+    // Initializing the graph
+    HashMap<Integer, Integer> inDegree = new HashMap<Integer, Integer>(); 
+    HashMap<Integer, List<Integer>> graph = new HashMap<>(); 
+    for(int i = 0; i < vertices; i++){
+        inDegree.put(i, 0); 
+        graph.put(i, new ArrayList<Integer>());
+    }
+    
+    // Build the graph
+    for(int i = 0; i < edges.length; i++){
+        int parent = edges[i][0];
+        int child = edges[i][1]; 
+        inDegree.put(child, inDegree.get(child) + 1); 
+        graph.get(parent).add(child); 
+    }
+    
+    // Find all sources which the ones that dont have incoming edge
+    Queue<Integer> sources = new LinkedList<>(); 
+    for(Map.Entry<Integer, Integer> entry : inDegree.entrySet() ){
+        if(entry.getValue() == 0){
+            sources.add(entry.getKey()); 
+        }
+    }
+    
+    /*
+    Add it to the sorted list.
+    Get all of its children from the graph.
+    Decrement the in-degree of each child by 1.
+    If a child’s in-degree becomes ‘0’, add it to the sources Queue.
+    */
+    
+    while(!sources.isEmpty()){
+        int vertix = sources.poll(); 
+        sortedOrder.add(vertix); 
+        List<Integer> childer = graph.get(vertix); 
+        
+        for(int child : childer){
+            inDegree.put(child, inDegree.get(child)-1);
+            
+            if(inDegree.get(child) == 0){
+                sources.add(child); 
+            }
+        }
+    }
+    return sortedOrder;
+  }
+}
